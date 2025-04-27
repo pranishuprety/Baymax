@@ -33,7 +33,7 @@ export default function DoctorDashboard() {
         {/* Sidebar */}
         <div className="hidden md:flex w-64 flex-col bg-gray-900/80 backdrop-blur-sm min-h-screen p-4 border-r border-purple-500/20">
           <div className="flex items-center justify-center mb-8">
-            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-purple-400">MindfulAI</h1>
+            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-purple-400">BayMax!</h1>
             <Badge className="ml-2 bg-purple-600 text-white border-none">Doctor</Badge>
           </div>
 
@@ -91,7 +91,7 @@ export default function DoctorDashboard() {
                   anchorX="center"
                   anchorY="middle"
                 >
-                  MindfulAI
+                  BayMax!
                 </Text>
               </Float>
             </Canvas>

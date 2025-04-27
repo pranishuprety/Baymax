@@ -63,7 +63,7 @@ export default function Home() {
             bevelOffset={0}
             bevelSegments={5}
           >
-            MindfulAI
+            BayMax!
             <meshStandardMaterial
               color="#a78bfa"
               emissive="#7c3aed"
@@ -87,7 +87,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            MindfulAI Therapist
+            BayMax AI Therapist
           </motion.h1>
           <motion.p
             className="text-xl text-purple-200 max-w-2xl mx-auto"

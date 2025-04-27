@@ -10,7 +10,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const app = express();
 const PORT = 3001;
 const SECRET_KEY = process.env.SECRET_KEY;
-
+const TOGETHER_KEY = process.env.TOGETHER_API_KEY;
 
 
 // Temporary in-memory "database"
@@ -440,8 +440,43 @@ app.post('/detectEmotion', async (req, res) => {
 });
 
   
+// Chat endpoint (add this near the bottom)
+app.post('/therapist/chat', async (req, res) => {
+  const { userId, message } = req.body;
+  try {
+    // Call Together AI chat completion API
+    const apiRes = await fetch('https://api.together.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${TOGETHER_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'together-gpt-2',      // or the model you provisioned
+        messages: [
+          { role: 'system', content: 'You are a compassionate AI therapist.' },
+          { role: 'user', content: message },
+        ],
+      }),
+    });
 
-  
+    if (!apiRes.ok) {
+      console.error('Together AI error status:', apiRes.status);
+      const errText = await apiRes.text();
+      console.error(errText);
+      return res.status(500).json({ reply: "I'm having trouble thinking right now." });
+    }
+
+    const { choices } = await apiRes.json();
+    const reply = choices?.[0]?.message?.content?.trim() || "Sorry, I couldn't formulate a reply.";
+    res.json({ reply });
+
+  } catch (err) {
+    console.error('Chat error:', err);
+    res.status(500).json({ reply: "Sorry, I'm offline at the moment." });
+  }
+});
+
 
 // Finally start the server
 app.listen(PORT, () => {
