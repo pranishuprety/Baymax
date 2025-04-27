@@ -1,8 +1,6 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-const connectDB = require('./backendStuff/lib/db');
-require('./backendStuff/lib/db'); // Import database connection
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
