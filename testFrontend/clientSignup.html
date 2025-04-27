@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Signup</title>
+</head>
+<body>
+  <button onclick="window.location.href='index.html'" style="position: fixed; top: 20px; right: 20px;">🏠 Home</button>
+  <h1>Client Signup</h1>
+
+  <form id="signupForm">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Sign Up</button>
+    <p>Already have an account? <a href="clientLogin.html">Login here</a></p>
+  </form>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('http://localhost:3001/client/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert('Signup successful! Please login.');
+          window.location.href = 'clientLogin.html';
+        } else {
+          alert(data.message || 'Signup failed.');
+        }
+      } catch (err) {
+        alert('Error signing up.');
+      }
+    });
+  </script>
+</body>
+</html>

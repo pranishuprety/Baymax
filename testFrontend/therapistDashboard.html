@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Therapist Dashboard</title>
+</head>
+<body>
+    <h1>Therapist Dashboard</h1>
+
+    <div id="welcomeMessage"></div>
+
+    <button id="logoutBtn">Logout</button>
+
+    <h2>Upload Your Profile Photo</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" required><br><br>
+        <button type="submit">Upload Photo</button>
+    </form>
+
+    <script>
+        // Fetch Dashboard Information
+        async function fetchDashboard() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('No token found. Please login first.');
+                window.location.href = 'therapistLogin.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3001/therapist/dashboard', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('welcomeMessage').innerText = data.message;
+                } else {
+                    alert('Session expired. Please login again.');
+                    localStorage.removeItem('token');
+                    window.location.href = 'therapistLogin.html';
+                }
+            } catch (err) {
+                console.error('Error fetching dashboard:', err);
+                alert('Error fetching dashboard.');
+            }
+        }
+
+        // Upload Profile Photo
+        const uploadForm = document.getElementById('uploadForm');
+
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please login again.');
+                window.location.href = 'therapistLogin.html';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('profilePhoto', document.getElementById('profilePhoto').files[0]);
+
+            try {
+                const response = await fetch('http://localhost:3001/therapist/uploadProfilePhoto', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+                alert(data.message);
+            } catch (err) {
+                alert('Failed to upload photo.');
+            }
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = 'therapistLogin.html';
+        }
+
+        // Setup event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDashboard();
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+        });
+    </script>
+</body>
+</html>

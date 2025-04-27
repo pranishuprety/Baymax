@@ -1,0 +1,137 @@
+/* Reset and basic styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+  }
+  
+  /* App layout */
+  #app {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Sidebar */
+  #sidebar {
+    width: 260px;
+    background: #1e1e2f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  
+  #logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #pastChats {
+    margin-top: 20px;
+  }
+  
+  .past-chat-item {
+    background: #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .past-chat-item span {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .past-chat-item button {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .past-chat-item button:hover {
+    color: white;
+  }
+  
+  /* Main Chat Area */
+  #main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Video & Mode Switch */
+  #videoSection {
+    margin-bottom: 10px;
+  }
+  
+  #modeSwitch {
+    margin-bottom: 10px;
+  }
+  
+  /* Buttons */
+  .action-btn, .mode-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .mode-btn {
+    background-color: #2196F3;
+  }
+  
+  .action-btn:hover, .mode-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* Chat Input */
+  #chatSection {
+    margin-bottom: 10px;
+  }
+  
+  #userInput {
+    width: 70%;
+    padding: 10px;
+    margin-right: 5px;
+  }
+  
+  /* Chat Box */
+  .chat-box {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: white;
+    overflow-y: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .chat-box div {
+    margin-bottom: 8px;
+  }
+  
+  .chat-box strong {
+    display: block;
+    margin-bottom: 3px;
+  }
+  
+  
