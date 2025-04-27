@@ -1,4 +1,6 @@
-require('dotenv').config(); // Load environment variables from .env file
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 require('./backendStuff/lib/db'); // Import database connection
 const express = require('express');
 const cors = require('cors');
