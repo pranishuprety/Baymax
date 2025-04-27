@@ -90,7 +90,7 @@ export default function PatientDashboard() {
     ctx.drawImage(videoRef.current, 0, 0);
     const base64 = canvas.toDataURL('image/jpeg').split(',')[1];
     try {
-      const res = await fetch('http://localhost:3001/detectEmotion', {
+      const res = await fetch('https://baymax-production-f546.up.railway.app/therapist/chat'      , {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64: base64 }),
@@ -115,7 +115,7 @@ export default function PatientDashboard() {
     setInput(''); setVoiceText('');
     try {
       const token = localStorage.getItem('token');
-      const resp = await fetch('http://localhost:3001/therapist/chat', {
+      const resp = await fetch('https://baymax-production-f546.up.railway.app/detectEmotion'    , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
